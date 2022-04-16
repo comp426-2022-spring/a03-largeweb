@@ -71,12 +71,12 @@ app.get('/app/flips/:number', (req, res) => {
     res.status(200).json(flips);
 })
 
-app.get('/app/flips/call/heads', (req, res) => {
+app.get('/app/flip/call/heads', (req, res) => {
     const game = flipACoin("heads")
     res.status(200).json(game)
 })
 
-app.get('/app/flips/call/tails', (req, res) => {
+app.get('/app/flip/call/tails', (req, res) => {
     const game = flipACoin("tails")
     res.status(200).json(game)
 })
