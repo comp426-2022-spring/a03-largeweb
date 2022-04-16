@@ -37,7 +37,21 @@ function coinFlips(flips) {
   for(let i=0; i<flips; i++) {
     rand[i] = coinFlip();
   }
-  return rand;
+  let headsCt = 0;
+  let tailsCt = 0;
+  for(let i=0; i<rand.length; i++) {
+    if(rand[i] == "heads") {
+        headsCt++;
+    }
+    if(rand[i] == "tails") {
+        tailsCt++;
+    }
+}
+let raw = rand
+const finalScore = {raw,"summary":{"tails":tailsCt,"heads":headsCt}}
+console.log(finalScore)
+//   return {rand, "summary":finalScore};
+  return finalScore;
 }
 
 function flipACoin(call) {
@@ -46,7 +60,7 @@ function flipACoin(call) {
   if(flip == call) {
     result += 'win';
   } else {
-    result += 'lost';
+    result += 'lose';
   }
   return {"call": call, "flip":flip, "result":result}
 }
