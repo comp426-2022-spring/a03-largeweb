@@ -1,6 +1,7 @@
 const express = require('express');
 const res = require('express/lib/response');
 const { process_params } = require('express/lib/router');
+// const {coinFlip, coinFlips } = require('./modules/coin.mjs');
 const app = express();
 
 app.use(express.json())
@@ -31,6 +32,25 @@ function coinFlip() {
     return (Math.floor(Math.random() * 2) == 0) ? 'heads' : 'tails';
 }
 
+function coinFlips(flips) {
+  let rand = [flips];
+  for(let i=0; i<flips; i++) {
+    rand[i] = coinFlip();
+  }
+  return rand;
+}
+
+function flipACoin(call) {
+  const flip = coinFlip();
+  let result = '';
+  if(flip == call) {
+    result += 'win';
+  } else {
+    result += 'lost';
+  }
+  return call, flip, result;
+}
+
 app.get('/app', (req, res) => {
     res.status(200).end("200 OK\n");
     res.type("text/plain");
@@ -45,10 +65,10 @@ app.get('/app/flip', (req, res) => {
     res.status(200).json({'flip': flip});
 })
 
-app.get('/app/flips/:number[0-9]{1,4}', (req, res) => {
-    var flips = coinFlips();
+app.get('/app/flips/:number', (req, res) => {
+    var flips = coinFlips(req.params.number);
     flipsObj = {}
-    res.status(200).json({'flip': flip});
+    res.status(200).json({'flip': flips});
 })
 
 app.get('/app/flips/call/heads', (req, res) => {
