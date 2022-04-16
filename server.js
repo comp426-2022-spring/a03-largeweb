@@ -48,7 +48,7 @@ function flipACoin(call) {
   } else {
     result += 'lost';
   }
-  return call, flip, result;
+  return {"call": call, "flip":flip, "result":result}
 }
 
 app.get('/app', (req, res) => {
@@ -68,7 +68,7 @@ app.get('/app/flip', (req, res) => {
 app.get('/app/flips/:number', (req, res) => {
     var flips = coinFlips(req.params.number);
     flipsObj = {}
-    res.status(200).json({'flip': flips});
+    res.status(200).json(flips);
 })
 
 app.get('/app/flips/call/heads', (req, res) => {
