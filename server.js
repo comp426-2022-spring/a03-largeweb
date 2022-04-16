@@ -67,7 +67,8 @@ app.get('/app/flip/call/:guess(heads|tails)', (req, res) => {
 })
 
 app.get('/*', (req, res) => {
-    res.status(400).end("404 Not Found")
+    res.status(404).send("404 Not Found")
+    res.type('text/plain');
     // res.statusCode = 404;
     // res.send("404 Not Found")
 })
@@ -78,5 +79,5 @@ const server = app.listen(port, () => {
 
 app.use((req, res) => {
     res.status(404).send("Endpoint does not exist 😞");
-    // res.type("text/plain");
+    res.type("text/plain");
 })
